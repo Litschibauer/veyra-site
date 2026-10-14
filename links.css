@@ -512,12 +512,16 @@ a {
   background: #0866ff;
 }
 
-/* Twitch: hervorgehoben, mit wanderndem Rand */
+/* Livestreams (Twitch, Kick): hervorgehoben, mit wanderndem Rand in der Farbe der Plattform */
 .live {
   --c: #9146ff;
   margin-bottom: 12px;
-  border-color: rgb(145 70 255 / 40%);
-  background: linear-gradient(135deg, rgb(145 70 255 / 20%), rgb(90 211 226 / 7%) 60%, rgb(255 255 255 / 3%));
+  border-color: color-mix(in srgb, var(--c) 40%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c) 20%, transparent), rgb(90 211 226 / 7%) 60%, rgb(255 255 255 / 3%));
+}
+
+.live.kick {
+  --c: #53fc18;
 }
 
 .live::after {
@@ -525,7 +529,7 @@ a {
   inset: -1px;
   padding: 1px;
   border-radius: inherit;
-  background: conic-gradient(from var(--spin), transparent 0 70%, #9146ff 82%, var(--cyan) 92%, transparent 100%);
+  background: conic-gradient(from var(--spin), transparent 0 70%, var(--c) 82%, var(--cyan) 92%, transparent 100%);
   content: "";
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
@@ -534,7 +538,11 @@ a {
 
 .live .glyph {
   border-color: transparent;
-  background: #9146ff;
+  background: var(--c);
+}
+
+.live.kick .glyph svg {
+  fill: #0b0e12;
 }
 
 .live .text b {
